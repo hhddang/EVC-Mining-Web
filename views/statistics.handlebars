@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Statistics</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/home.css" class="">
+
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    {{>(nav)}}
+    <div class="container-fluid">
+        <div class="row" style="align-items: flex-start;">
+            <div class="col-8">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 80px;">Word</th>
+                            <th scope="col">Count</th>
+                            <th scope="col">Percent</th>
+                            <th scope="col">F = -log(n/N)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each data}}
+                            <tr>
+                                <th scope="row" style="color: white; background-color: #17a2b8;">{{this.word}}</th>
+                                <td>{{this.count}}</td>
+                                <td>{{this.percent}}</td>
+                                <td>{{this.F}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4" style="height:100%">
+                <form action="" method="post">
+                    <div class="row">
+                        <div class="col">
+                            <div class="row-sm">Language</div>
+                    <div class="row-sm">
+                        <input type="radio" id="checkVi" name="lang" value="vn">
+                        <label for="vietnamese">Vietnamese</label>
+                    </div>
+                    <div class="row-sm">
+                        <input type="radio" id="checkEn" name="lang" value="en">
+                        <label for="english">English</label>
+                    </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="row-sm">POS Tag</div>
+                    <div class="row-sm">
+                        <select name="pos" id="tag">
+                            <option value="">No tag</option>
+                        </select>
+                    </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="row mt-2 mb-2">
+                            <button type="submit" style="padding: 0 10px;border:none; border-radius:15px">Search</button>
+                        </div>
+                        <div class="row">
+                            <button type="reset" style="padding: 0 10px;border:none; border-radius:15px">Reset</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+    
+    
+    
+    <script>
+        document.getElementById('checkEn').addEventListener('click', function(){
+            if (document.getElementById('checkEn').checked == true){
+          var pos = ['CC', 'CD', 'DT', 'EX', 'FW', 'IN', 'JJ', 'JJR', 'JJS', 'LS', 'MD', 'NN', 'NNP', 'NNPS', 'NNS', 'PDT', 'POS', 'PRP', 'PRP$', 'RB', 'RBR', 'RBS', 'RP', 'SYM', 'TO', 'UH', 'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'WDT', 'WP', 'WP$', 'WRB'];
+          var detail = ['CC: Coordinating conjunction', 'CD: Cardinal number', 'DT: Determiner', 'EX: Existential there', 'FW: Foreign Word', 'IN: Preposition or subordinating conjunction', 'JJ: Adjective', 'JJR: Adjective, comparative', 'JJS: Adjective, superlative', 'LS: List item marker', 'MD: Modal', 'NN: Noun, singular or mass', 'NNP: Proper noun, singular', 'NNPS: Proper noun, plural', 'NNS: Noun, plural', 'PDT: Predeterminer', 'POS: Possessive ending', 'PRP: Personal pronoun', 'PRP$: Possessive pronoun', 'RB: Adverb', 'RBR: Adverb, comparative', 'RBS: Adverb, superlative', 'RP: Particle', 'SYM: Symbol', 'TO: to', 'UH: Interjection', 'VB: Verb, base form', 'VBD: Verb, past tense', 'VBG: Verb, gerund or present participle', 'VBN: Verb, past participle', 'VBP: Verb, non-3rd person singular present', 'VBZ: Verb, 3rd person singular present', 'WDT: Wh-determiner', 'WP: Wh-pronoun', 'WP$: Possessive wh-pronoun', 'WRB: Wh-adverb'];
+          
+          var option = document.querySelectorAll('option');
+          for (let i=1;i<option.length;i++){
+              document.querySelector('select').removeChild(option[i]);
+          }
+          for (let i=0;i<pos.length ;i++){
+            var option = document.createElement('option');
+            option.value = pos[i];
+            option.className = 'optionDropbox';
+            option.innerHTML = pos[i];
+
+            document.querySelector('select').appendChild(option);
+          }
+        }
+        })
+        
+        document.getElementById('checkVi').addEventListener('click', function(){
+        if (document.getElementById('checkVi').checked == true){
+          var pos = ['Nr', 'Nc', 'Nu', 'Nt', 'Nq', 'Nn', 'Vd', 'Ve', 'Vc', 'Vv', 'D', 'An', 'Aa', 'Pd', 'Pp', 'R', 'Cm', 'Cp', 'Cs', 'M', 'E', 'FW', 'ON', 'PU', 'ID'];
+          var detail = ['Nr: Proper noun', 'Nc: Classifier co-noun (loáº¡i tá»«)', 'Nu: Unit noun', 'Nt: Noun of time', 'Nq: Quantifier noun (numerals)', 'Nn: Other nouns', 'Vd: Directional verb', 'Ve: Exist verb', 'Vc: Copula lÃ\xa0 verb', 'Vv: Other verbs', 'D: Directional co-verb', 'An: Ordinal number', 'Aa: Other adjectives', 'Pd: Demonstrative pronoun', 'Pp: Other pronouns', 'R: Adjunct', 'Cm: Major/minor preposition', 'Cp: Parallel Conjunction', 'Cs: Subordinating conjunction', 'M: Modifier word', 'E: Exclamation word', 'FW: Foreign word', 'ON: Onomatopoeia', 'PU: Punctuation', 'ID: Idioms'];
+              var option = document.querySelectorAll('option');
+          for (let i=1;i<option.length;i++){
+              document.querySelector('select').removeChild(option[i]);
+          }
+          for (let i=0;i<pos.length ;i++){
+            var option = document.createElement('option');
+            option.value = pos[i];
+            option.className = 'optionDropbox';
+            option.innerHTML = pos[i];
+
+            document.querySelector('select').appendChild(option);
+          }
+        }
+        })
+ 
+    </script>
+
+</body>
+</html>

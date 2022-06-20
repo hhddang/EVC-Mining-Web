@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="/assets/leader-line.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat&family=Poppins:wght@200&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap');
+        *{
+            margin:0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: bold;
+        }
+
+        body{
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .header{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        }
+
+        .navbar-brand{
+        color: black;
+        font-weight: bolder;
+        }
+        .navbar-brand:hover{
+        color: black;
+        font-weight: bolder;
+        }
+
+        ul{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: fit-content;
+        height: 40px;
+        margin-bottom: 0px;
+        }
+        ul li{
+        position: relative;
+        list-style: none;
+        width: fit-content;
+        height:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 5px;
+        }
+
+        ul li:hover{
+        background-color: lightblue;
+        color: black;
+        }
+
+        ul .active{
+        border: 2px solid lightblue;
+        }
+
+        ul li a{
+        text-decoration: none;
+        font-size: 1em;
+        color: black;
+        }
+
+        ul li a:hover{
+        text-decoration: none;
+        }
+
+        .changepage{
+
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: fit-content;
+            z-index: 5;
+        }
+        .changepage span{
+            font-size: 3em;
+            margin: 20px;
+            transition: 0.5s;
+        }
+
+        .changepage span:nth-child(1):hover{
+            transform: translateX(-5px);
+        }
+
+        .changepage span:nth-child(2){
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3em;
+            width: 100px;
+            height: 50px;
+            border-radius: 25px;
+            background-color: #b22222;
+        }
+
+        .changepage span:nth-child(3):hover{
+            transform: translateX(5px);
+        }
+        .title{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 30px;
+            padding:0 20px;
+            padding-right: 30px;
+            z-index: 5;
+        }
+
+        .container{
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: auto;
+            padding:0 20px;
+            z-index: 5;
+        }
+        .container:nth-child(1){
+            height: 30px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888; 
+        }
+        
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+        th{
+            background-color: #249c9c;
+            border-style :hidden;
+            height: 30px;
+        }
+        table{
+            position: relative;
+            
+        }
+        table, td {
+            border: 1px solid white;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td {
+            background-color: #96D4D4;
+            height: 40px;
+        }
+
+        p{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        /* The Modal (background) */
+        .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow-x: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        /* Modal Content/Box */
+        .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: fit-content; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button */
+        .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+        }
+        .con{
+            display: flex;
+        }
+        .con1{
+            margin-bottom: 250px;
+        }
+
+        .word {
+            margin-left: 10px;
+        }
+        .btn{
+            margin-right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid" style="background-color: #3cb371; display: flex; justify-content: center;align-items: center;">
+        <nav class="navbar navbar-default" style="background-color: #3cb371;width: 100%;border: none;">
+            <div class="container-fluid header">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="/">Khai thác ngữ liệu song ngữ Việt - Anh</a>
+              </div>
+              <ul class="nav justify-content-center">
+                <li class="active">
+                  <a href="/">Home</a>
+                </li>
+                <li>
+                  <a href="/search">Search</a>
+                </li>
+                <li>
+                  <a href="/statistics">Statistics</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+    </div>
+
+
+    <div class="changepage">
+        <span class="iconbackward"><ion-icon name="arrow-back-circle-outline"></ion-icon></span>
+        <input type="text" value="<%=page%>" style="width: 150px; font-size: 2em; text-align: center;" id="pageNum">
+        <span class="iconforward"><ion-icon name="arrow-forward-circle-outline"></ion-icon></span>
+    </div>
+    <div class="change-page"></div>
+
+
+    <div class="container title" style="height: fit-content;">
+        <table style = "width: 100%;height: 50px;">
+            <tr >
+                <th style ="width : 10%">ID</th>
+                <th>Sentences</th>
+            </tr>
+        </table>
+    </div>
+    <div class="container source_container">
+        <table class = "source_table">
+        </table>
+    </div>
+
+
+    <div class="container title" style="height: fit-content; z-index: 0;">
+        <table style = "width: 100%;height: 50px;">
+            <tr >
+                <th style ="width : 10%">ID</th>
+                <th>Sentences</th>
+            </tr>
+        </table>
+    </div>
+    <div class="container target_container" style="z-index: 0;">
+        <table class="target_table">
+        </table>
+    </div>
+    
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        
+        
+    <script>
+            const cont1 = document.querySelector('.source_container');
+            const cont2 = document.querySelector('.target_container');
+            cont1.addEventListener('scroll',function(){
+                cont2.scroll(0,cont1.scrollTop);
+            });
+            cont2.addEventListener('scroll',function(){
+                cont1.scroll(0,cont2.scrollTop);
+            });
+    </script>
+
+
+
+    <script>
+        document.querySelector('.source_table').innerHTML = `
+        <% for(let i = (page-1)*10 ; i < page*10 ; i++){ %>
+                <tr>
+                    <td style = "width : 10%"><%= b[i].id %></td>
+                    <td><%= b[i].sent %>
+                        <button type="button" id = '<%= b[i].id %>' class="btn btn-primary myBtn" data-bs-toggle="modal" data-bs-target="#myModal" formaction='/<%= b[i].id %>'>
+                           Show
+                        </button>
+                        </td>
+                        <div id="myModal<%=b[i].id%>" class="modal">
+
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <div class="con con1">
+                                    <% let key_vn = Object.keys(vn_word_data);%>
+                                    <% let idw_vn = 'VD' + b[i].id + '01';%>
+                                    <% let index = key_vn.indexOf(idw_vn);%>
+                                    <% let id = key_vn[index];%>
+                                    <% let en_id = id.replace('VD','ED');%>
+                                    <% en_id = en_id.substr(0,8) + vn_word_data[id]['link'][0].toString().padStart(2,'0')%>
+                                    <div class="word <%=en_id%>" id = "<%=id%>">
+                                        <p><%=vn_word_data[id]['pos']%></p>
+                                        <p><%=vn_word_data[id]['word']%></p>
+                                        </div>
+                                    <% index++;%>
+                                    <% id = key_vn[index];%>
+                                    <%while(id.slice(8) != '01'){%>
+                                        <% en_id = id.replace('VD','ED');%>
+                                        <% en_id = en_id.substr(0,8) + vn_word_data[id]['link'][0].toString().padStart(2,'0')%>
+                                              <div class="word <%=en_id%>" id = "<%=id%>">
+                                        <p><%=vn_word_data[id]['pos']%></p>
+                                        <p><%=vn_word_data[id]['word']%></p>
+                                        </div>
+                                        <% index++;%>
+                                        <% id = key_vn[index];%>
+                                    <%}%>
+                                    </div>
+                                    <div class="con con2">
+                                        <% let key_en = Object.keys(en_word_data);%>
+                                        <% let idw_en = 'ED' + b[i].id + '01';%>
+                                        <% let index_en = key_en.indexOf(idw_en);%>
+                                        <% let id_en = key_en[index_en];%>
+                                        <div class="word" id="<%=id_en%>">
+                                            <p><%=en_word_data[id_en]['word']%></p>
+                                            <p><%=en_word_data[id_en]['pos']%></p>
+                                            
+                                        </div>
+                                        <% index_en++;%>
+                                        <% id_en = key_en[index_en];%>
+                                        <%while(id_en.slice(8) != '01'){%>
+                                            <div class="word" id="<%=id_en%>">
+                                            <p><%=en_word_data[id_en]['word']%></p>
+                                            <p><%=en_word_data[id_en]['pos']%></p>
+                                            
+                                        </div>
+                                            <% index_en++;%>
+                                            <% id_en = key_en[index_en];%>
+                                        <%}%>
+                                    </div>
+                                </div>
+
+                                </div>
+                                                </tr>
+                                            <% }; %>
+        `;
+
+        document.querySelector('.target_table').innerHTML = `
+        <% for(let i = (page-1)*10 ; i < page*10 ; i++){ %>
+                    <tr>
+                        <td style = "width : 10%"><%= a[i].id %></td>
+                        <td><%= a[i].sent %>
+                            <button type="button" id = '<%= a[i].id %>' class="btn btn-primary myBtn" data-bs-toggle="modal" data-bs-target="#myModal" formaction='/<%= b[i].id %>'>
+                           Show
+                        </button>
+                        </td>
+                    </tr>
+                <%}%>
+        `;
+        
+    </script>
+
+
+    <script>
+        // Get the modal
+
+            // Get the button that opens the modal
+            var btn = document.querySelectorAll(".myBtn");
+
+            // When the user clicks on the button, open the modal
+            btn.forEach((item) =>{item.onclick = function() {
+                document.querySelectorAll('.modal').forEach((item) =>{
+                    item.style.display = 'none';})
+
+                document.querySelectorAll('.leader-line').forEach((i) => {
+                        i.remove();})
+                
+                window.scroll(0,0);
+                var modl = document.getElementById('myModal'+item.id);
+                modl.style.display = "flex";
+                modl.style.flexDirection = 'column';
+                modl.style.zIndex = 5;
+
+            const word = document.getElementById('myModal'+item.id).querySelector('.con1').querySelectorAll('.word');
+                word.forEach((item) => {
+                    if (item.classList.item(1).slice(8) != '00'){
+                        var myLine1 = new LeaderLine(
+                        item,
+                        document.getElementById(item.classList.item(1)),
+                        {color:'blue', size:2}
+                    );
+                    myLine1.setOptions({startSocket:"bottom",endSocket:"top"});
+                    }
+                
+                })
+                document.querySelectorAll('.leader-line').forEach((item) => {
+                    item.style.zIndex = 5;
+                    item.style.position = 'fixed';
+                })
+            }
+
+            })
+
+            // When the user clicks on <span> (x), close the modal
+            var modal = document.querySelectorAll('.modal');
+            modal.forEach((item) =>{
+                item.getElementsByClassName('close')[0].onclick = function(){
+                    item.style.display = 'none';
+                    document.querySelectorAll('.leader-line').forEach((i) => {
+                        i.remove();
+                    })
+                }
+
+            })
+
+            
+            window.onclick = function(event) {
+                modal.forEach((item) =>{
+                    if (event.target == item) {
+                            item.style.display = "none";
+                            document.querySelectorAll('.leader-line').forEach((item) => {
+                            item.remove();
+                            })
+                        }
+                    })
+            }
+    </script>
+
+    <script>
+        const iconforward = document.querySelector('.iconforward');
+        iconforward.addEventListener('click', function(){
+           var value = document.getElementById('pageNum').value;
+           if (parseInt(value)== 99) alert("This is end page !")
+           
+           else{
+               var new_value = (parseInt(value)+1).toString();
+                window.location.href = '/page/' + new_value;
+           }
+        })
+
+        const iconbackward = document.querySelector('.iconbackward');
+        iconbackward.addEventListener('click', function(){
+            var value = document.getElementById('pageNum').value;
+            if (parseInt(value) == 1) {
+                alert("This is first page !");
+            }
+            else{
+                var new_value = (parseInt(value) - 1).toString();
+                if (parseInt(new_value) == 1) window.location.href = '/';
+                else
+                    window.location.href = '/page/' + new_value;
+            }
+        })
+    </script>
+</body>
+</html>

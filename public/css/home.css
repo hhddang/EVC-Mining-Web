@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat&family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap');
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px;
+}
+.nav li{
+    position: relative;
+    list-style: none;
+    width: fit-content;
+    height:70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ul li a{
+    text-decoration: none;
+    font-size: 2em;
+}
+ul li:hover{
+    background-color: lightblue;
+}
+
+.changepage{
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    z-index: 5;
+}
+.changepage a{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.changepage a span{
+    font-size: 3em;
+    margin: 20px;
+    transition: 0.5s;
+}
+
+.changepage span:nth-child(1):hover{
+    transform: translateX(-5px);
+}
+
+.changepage span:nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    width: 100px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #b22222;
+}
+
+.changepage span:nth-child(3):hover{
+    transform: translateX(5px);
+}
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    padding:0 20px;
+    padding-right: 30px;
+    z-index: 5;
+}
+
+.container{
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: auto;
+    padding:0 20px;
+    margin-bottom: 50px;
+    z-index: 5;
+}
+.container:nth-child(1){
+    height: 30px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+th{
+    background-color: #249c9c;
+    border-style :hidden;
+    height: 30px;
+}
+table{
+    position: relative;
+    
+}
+table, td {
+    border: 1px solid white;
+    border-collapse: collapse;
+    width: 100%;
+  }
+td {
+    background-color: #96D4D4;
+    height: 40px;
+  }
+
+p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
+}

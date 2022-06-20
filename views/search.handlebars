@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/home.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- Navigation Bar -->
+        {{>(nav)}}
+
+        <!-- Search bar -->
+        <div id="search-bar" style="margin-bottom: 50px; background:lightgreen; padding: 10px 0;">
+            <form action="./word" method="post">
+                <div class="row m-1">
+                    <div class="col-sm-4" style="height: 116px;">
+                        <div class="row">
+                            <h5>Source language</h5>
+                        </div>
+                        <div class="row">
+                            <input type="radio" id="checkVi" name="lang" value="vn">
+                            <label for="vietnamese">Vietnamese</label>
+                        </div>
+                        <div class="row">
+                            <input type="radio" id="checkEn" name="lang" value="en">
+                            <label for="english">English</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <h5>Word</h5>
+                        </div>
+                        <div class="row">
+                            <input type="text" name='word' placeholder="Enter your word...">
+                        </div>
+                        <div class="row justify-content-start">
+                            <div class="col-sm-4">
+                                <input type="radio" id="match" name="type" value="mat">
+                                <label for="match">Match</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="radio" id="morphology" name="type" value="mor">
+                                <label for="morphology">Morphology</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2" style="height: 116px;">
+                        <div class="row">
+                            <h5>POS Tag</h5>
+                        </div>
+                        <div class="row">
+                            <select name="pos" id="tag">
+                                <option value="">No tag</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="row mb-2">
+                            <button type="submit" style="padding: 0 10px;border:none; border-radius:15px">Search</button>
+                        </div>
+                        <div class="row">
+                            <button type="reset" style="padding: 0 10px;border:none; border-radius:15px">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Result -->
+        <div id="result">
+            <div class="row" style="margin-bottom: 50px;">
+                <div class="col-sm-5">
+                    Total found: {{data.total_sents}}
+                </div>
+                <div class="col-sm-7" style="display: flex;">
+                    <a href="/search/pre-page" style="font-size: 2em;"><i class="fa fa-arrow-circle-left"></i></a>
+                    <p style="width: 50px; background: lightblue">{{data.page}}</p>
+                    <a href="/search/nxt-page" style="font-size: 2em;"><i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div id="soure-language" style="margin-bottom: 100px;">
+                <div class="table-title">Source Language</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Left</th>
+                            <th scope="col">Key</th>
+                            <th scope="col">Right</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each data.mat_splited_sents}}
+                            <tr>
+                                <th scope="row" id={{this.id}}>{{this.id}}</th>
+                                <td>{{this.left}}</td>
+                                <td>{{this.key}}</td>
+                                <td>{{this.right}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div id="target-language">
+                <div class="table-title">Target Language</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Left</th>
+                            <th scope="col">Key</th>
+                            <th scope="col">Right</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each data.opp_splited_sents}}
+                            <tr>
+                                <th scope="row" id={{this.id}}>{{this.id}}</th>
+                                <td>{{this.left}}</td>
+                                <td>{{this.key}}</td>
+                                <td>{{this.right}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <script>
+             document.getElementById('checkEn').addEventListener('click', function(){
+            if (document.getElementById('checkEn').checked == true){
+          var pos = ['CC', 'CD', 'DT', 'EX', 'FW', 'IN', 'JJ', 'JJR', 'JJS', 'LS', 'MD', 'NN', 'NNP', 'NNPS', 'NNS', 'PDT', 'POS', 'PRP', 'PRP$', 'RB', 'RBR', 'RBS', 'RP', 'SYM', 'TO', 'UH', 'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'WDT', 'WP', 'WP$', 'WRB'];
+          var detail = ['CC: Coordinating conjunction', 'CD: Cardinal number', 'DT: Determiner', 'EX: Existential there', 'FW: Foreign Word', 'IN: Preposition or subordinating conjunction', 'JJ: Adjective', 'JJR: Adjective, comparative', 'JJS: Adjective, superlative', 'LS: List item marker', 'MD: Modal', 'NN: Noun, singular or mass', 'NNP: Proper noun, singular', 'NNPS: Proper noun, plural', 'NNS: Noun, plural', 'PDT: Predeterminer', 'POS: Possessive ending', 'PRP: Personal pronoun', 'PRP$: Possessive pronoun', 'RB: Adverb', 'RBR: Adverb, comparative', 'RBS: Adverb, superlative', 'RP: Particle', 'SYM: Symbol', 'TO: to', 'UH: Interjection', 'VB: Verb, base form', 'VBD: Verb, past tense', 'VBG: Verb, gerund or present participle', 'VBN: Verb, past participle', 'VBP: Verb, non-3rd person singular present', 'VBZ: Verb, 3rd person singular present', 'WDT: Wh-determiner', 'WP: Wh-pronoun', 'WP$: Possessive wh-pronoun', 'WRB: Wh-adverb'];
+          
+          var option = document.querySelectorAll('option');
+          for (let i=1;i<option.length;i++){
+              document.querySelector('select').removeChild(option[i]);
+          }
+          for (let i=0;i<pos.length ;i++){
+            var option = document.createElement('option');
+            option.value = pos[i];
+            option.className = 'optionDropbox';
+            option.innerHTML = pos[i];
+
+            document.querySelector('select').appendChild(option);
+          }
+        }
+        })
+        
+        document.getElementById('checkVi').addEventListener('click', function(){
+        if (document.getElementById('checkVi').checked == true){
+          var pos = ['Nr', 'Nc', 'Nu', 'Nt', 'Nq', 'Nn', 'Vd', 'Ve', 'Vc', 'Vv', 'D', 'An', 'Aa', 'Pd', 'Pp', 'R', 'Cm', 'Cp', 'Cs', 'M', 'E', 'FW', 'ON', 'PU', 'ID'];
+          var detail = ['Nr: Proper noun', 'Nc: Classifier co-noun (loáº¡i tá»«)', 'Nu: Unit noun', 'Nt: Noun of time', 'Nq: Quantifier noun (numerals)', 'Nn: Other nouns', 'Vd: Directional verb', 'Ve: Exist verb', 'Vc: Copula lÃ\xa0 verb', 'Vv: Other verbs', 'D: Directional co-verb', 'An: Ordinal number', 'Aa: Other adjectives', 'Pd: Demonstrative pronoun', 'Pp: Other pronouns', 'R: Adjunct', 'Cm: Major/minor preposition', 'Cp: Parallel Conjunction', 'Cs: Subordinating conjunction', 'M: Modifier word', 'E: Exclamation word', 'FW: Foreign word', 'ON: Onomatopoeia', 'PU: Punctuation', 'ID: Idioms'];
+              var option = document.querySelectorAll('option');
+          for (let i=1;i<option.length;i++){
+              document.querySelector('select').removeChild(option[i]);
+          }
+          for (let i=0;i<pos.length ;i++){
+            var option = document.createElement('option');
+            option.value = pos[i];
+            option.className = 'optionDropbox';
+            option.innerHTML = pos[i];
+
+            document.querySelector('select').appendChild(option);
+          }
+        }
+        })
+ 
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
